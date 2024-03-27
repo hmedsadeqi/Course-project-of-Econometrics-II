@@ -1,172 +1,172 @@
 clear all
 cd "D:\Arak University\Metrics 2\Projects"
 
-odbc load, table("R1400P1") dsn("heis1400")
+odbc load, table("R1398P1") dsn("heis1398")
 generate ur = 0
-save "Data and Code/R1400" , replace
+save "Data and Code/R1398" , replace
 
 
 clear all 
 
-odbc load, table("R1400Data") dsn("heis1400")
+odbc load, table("R1398Data") dsn("heis1398")
 keep weight Address
-save "Data and Code/wr1400" , replace
+save "Data and Code/wr1398" , replace
 
-use "Data and Code/R1400"
-merge m:1 Address using "Data and Code/wr1400", keepusing(weight)
-save "Data and Code/R1400F", replace
+use "Data and Code/R1398"
+merge m:1 Address using "Data and Code/wr1398", keepusing(weight)
+save "Data and Code/R1398F", replace
 
 clear all
 
-odbc load, table("U1400P1") dsn("heis1400")
+odbc load, table("U1398P1") dsn("heis1398")
 generate ur = 1
-save "Data and Code/U1400" , replace
+save "Data and Code/U1398" , replace
 
 
 clear all 
 
-odbc load, table("U1400Data") dsn("heis1400")
+odbc load, table("U1398Data") dsn("heis1398")
 keep weight Address
-save "Data and Code/wu1400" , replace
+save "Data and Code/wu1398" , replace
 
-use "Data and Code/U1400"
-merge m:1 Address using "Data and Code/wu1400", keepusing(weight)
-save "Data and Code/U1400F", replace
+use "Data and Code/U1398"
+merge m:1 Address using "Data and Code/wu1398", keepusing(weight)
+save "Data and Code/U1398F", replace
 
-use "Data and Code/U1400F"
+use "Data and Code/U1398F"
 
-append using "Data and Code/R1400F"
-save "Data and Code/P1400" , replace
+append using "Data and Code/R1398F"
+save "Data and Code/P1398" , replace
 
-use "Data and Code/P1400"
+use "Data and Code/P1398"
 keep DYCOL03 DYCOL04 DYCOL05 DYCOL06 DYCOL07 DYCOL08 DYCOL09 DYCOL10 weight Address ur
 
 rename (DYCOL03 DYCOL04 DYCOL05 DYCOL06 DYCOL07 DYCOL08 DYCOL09 DYCOL10 weight Address ur)(relate gender age lit edustate educ wstate marr weight Address ur)
 
 destring relate gender age lit marr weight ur wstate educ edustate, replace force
 
-save "Data and Code/P1400" , replace
+save "Data and Code/P1398" , replace
 //----------------------------------------
 clear all
 
-odbc load, table("R1400P3S01") dsn("heis1400")
+odbc load, table("R1398P3S01") dsn("heis1398")
 keep DYCOL06 Address
 destring DYCOL06, replace force
-save "Data and Code/R1400P3S01" , replace
+save "Data and Code/R1398P3S01" , replace
 
 clear all 
 
-odbc load, table("U1400P3S01") dsn("heis1400")
+odbc load, table("U1398P3S01") dsn("heis1398")
 keep DYCOL06 Address
 destring DYCOL06, replace force
 
-save "Data and Code/U1400P3S01" , replace
+save "Data and Code/U1398P3S01" , replace
 
 clear all 
 
-odbc load, table("R1400P3S02") dsn("heis1400")
+odbc load, table("R1398P3S02") dsn("heis1398")
 keep DYCOL06 Address
 destring DYCOL06, replace force
 
-save "Data and Code/R1400P3S02" , replace
+save "Data and Code/R1398P3S02" , replace
 
 clear all
 
-odbc load, table("U1400P3S02") dsn("heis1400")
+odbc load, table("U1398P3S02") dsn("heis1398")
 keep DYCOL06 Address
 destring DYCOL06, replace force
 
-save "Data and Code/U1400P3S02" , replace
+save "Data and Code/U1398P3S02" , replace
 
 
-append using "Data and Code/U1400P3S01"
-append using "Data and Code/R1400P3S01"
-append using "Data and Code/R1400P3S02"
+append using "Data and Code/U1398P3S01"
+append using "Data and Code/R1398P3S01"
+append using "Data and Code/R1398P3S02"
 collapse (sum) DYCOL06 ,by(Address)
 
-save "Data and Code/U1400P3S1" , replace
+save "Data and Code/U1398P3S1" , replace
 
 
 //_____________________ 
 clear all
 
-odbc load, table("U1400P3S03") dsn("heis1400")
+odbc load, table("U1398P3S03") dsn("heis1398")
 keep DYCOL03 Address
 destring DYCOL03, replace force
 
-save "Data and Code/U1400P3S03" , replace
+save "Data and Code/U1398P3S03" , replace
 
 
 clear all 
 
-odbc load, table("U1400P3S05") dsn("heis1400")
+odbc load, table("U1398P3S05") dsn("heis1398")
 keep DYCOL03 Address
 destring DYCOL03, replace force
 
-save "Data and Code/U1400P3S05" , replace
+save "Data and Code/U1398P3S05" , replace
 
 clear all 
 
-odbc load, table("U1400P3S06") dsn("heis1400")
+odbc load, table("U1398P3S06") dsn("heis1398")
 keep DYCOL03 Address
 destring DYCOL03, replace force
 
-save "Data and Code/U1400P3S06" , replace
-
-
-clear all 
-
-odbc load, table("U1400P3S07") dsn("heis1400")
-keep DYCOL03 Address
-destring DYCOL03, replace force
-
-save "Data and Code/U1400P3S07" , replace
-
-clear all 
-
-odbc load, table("U1400P3S08") dsn("heis1400")
-keep DYCOL03 Address
-destring DYCOL03, replace force
-
-save "Data and Code/U1400P3S08" , replace
-
-clear all 
-
-odbc load, table("U1400P3S09") dsn("heis1400")
-keep DYCOL03 Address
-destring DYCOL03, replace force
-
-save "Data and Code/U1400P3S09" , replace
-
-clear all 
-
-odbc load, table("U1400P3S11") dsn("heis1400")
-keep DYCOL03 Address
-destring DYCOL03, replace force
-
-save "Data and Code/U1400P3S11" , replace
+save "Data and Code/U1398P3S06" , replace
 
 
 clear all 
 
-odbc load, table("U1400P3S12") dsn("heis1400")
+odbc load, table("U1398P3S07") dsn("heis1398")
 keep DYCOL03 Address
 destring DYCOL03, replace force
 
-save "Data and Code/U1400P3S12" , replace
+save "Data and Code/U1398P3S07" , replace
+
+clear all 
+
+odbc load, table("U1398P3S08") dsn("heis1398")
+keep DYCOL03 Address
+destring DYCOL03, replace force
+
+save "Data and Code/U1398P3S08" , replace
+
+clear all 
+
+odbc load, table("U1398P3S09") dsn("heis1398")
+keep DYCOL03 Address
+destring DYCOL03, replace force
+
+save "Data and Code/U1398P3S09" , replace
+
+clear all 
+
+odbc load, table("U1398P3S11") dsn("heis1398")
+keep DYCOL03 Address
+destring DYCOL03, replace force
+
+save "Data and Code/U1398P3S11" , replace
 
 
-append using "Data and Code/U1400P3S03"
-append using "Data and Code/U1400P3S05"
-append using "Data and Code/U1400P3S06"
-append using "Data and Code/U1400P3S07"
-append using "Data and Code/U1400P3S08"
-append using "Data and Code/U1400P3S09"
-append using "Data and Code/U1400P3S11"
+clear all 
+
+odbc load, table("U1398P3S12") dsn("heis1398")
+keep DYCOL03 Address
+destring DYCOL03, replace force
+
+save "Data and Code/U1398P3S12" , replace
+
+
+append using "Data and Code/U1398P3S03"
+append using "Data and Code/U1398P3S05"
+append using "Data and Code/U1398P3S06"
+append using "Data and Code/U1398P3S07"
+append using "Data and Code/U1398P3S08"
+append using "Data and Code/U1398P3S09"
+append using "Data and Code/U1398P3S11"
 collapse (sum) DYCOL03 ,by(Address)
 
 
-save "Data and Code/U1400P3S2" , replace
+save "Data and Code/U1398P3S2" , replace
 
 
 
@@ -175,136 +175,136 @@ save "Data and Code/U1400P3S2" , replace
 
 clear all 
 
-odbc load, table("R1400P3S03") dsn("heis1400")
+odbc load, table("R1398P3S03") dsn("heis1398")
 keep DYCOL03 Address
 destring DYCOL03, replace force
 
-save "Data and Code/R1400P3S03" , replace
+save "Data and Code/R1398P3S03" , replace
 
 
 clear all 
 
-odbc load, table("R1400P3S05") dsn("heis1400")
+odbc load, table("R1398P3S05") dsn("heis1398")
 keep DYCOL03 Address
 destring DYCOL03, replace force
 
-save "Data and Code/R1400P3S05" , replace
+save "Data and Code/R1398P3S05" , replace
 
 clear all 
 
-odbc load, table("R1400P3S06") dsn("heis1400")
+odbc load, table("R1398P3S06") dsn("heis1398")
 keep DYCOL03 Address
 destring DYCOL03, replace force
 
-save "Data and Code/R1400P3S06" , replace
-
-
-clear all 
-
-odbc load, table("R1400P3S07") dsn("heis1400")
-keep DYCOL03 Address
-destring DYCOL03, replace force
-
-save "Data and Code/R1400P3S07" , replace
-
-clear all 
-
-odbc load, table("R1400P3S08") dsn("heis1400")
-keep DYCOL03 Address
-destring DYCOL03, replace force
-
-save "Data and Code/R1400P3S08" , replace
-
-clear all 
-
-odbc load, table("R1400P3S09") dsn("heis1400")
-keep DYCOL03 Address
-destring DYCOL03, replace force
-
-save "Data and Code/R1400P3S09" , replace
-
-clear all 
-
-odbc load, table("R1400P3S11") dsn("heis1400")
-keep DYCOL03 Address
-destring DYCOL03, replace force
-
-save "Data and Code/R1400P3S11" , replace
+save "Data and Code/R1398P3S06" , replace
 
 
 clear all 
 
-odbc load, table("R1400P3S12") dsn("heis1400")
+odbc load, table("R1398P3S07") dsn("heis1398")
 keep DYCOL03 Address
 destring DYCOL03, replace force
 
-save "Data and Code/R1400P3S12" , replace
+save "Data and Code/R1398P3S07" , replace
+
+clear all 
+
+odbc load, table("R1398P3S08") dsn("heis1398")
+keep DYCOL03 Address
+destring DYCOL03, replace force
+
+save "Data and Code/R1398P3S08" , replace
+
+clear all 
+
+odbc load, table("R1398P3S09") dsn("heis1398")
+keep DYCOL03 Address
+destring DYCOL03, replace force
+
+save "Data and Code/R1398P3S09" , replace
+
+clear all 
+
+odbc load, table("R1398P3S11") dsn("heis1398")
+keep DYCOL03 Address
+destring DYCOL03, replace force
+
+save "Data and Code/R1398P3S11" , replace
 
 
-append using "Data and Code/R1400P3S03"
-append using "Data and Code/R1400P3S05"
-append using "Data and Code/R1400P3S06"
-append using "Data and Code/R1400P3S07"
-append using "Data and Code/R1400P3S08"
-append using "Data and Code/R1400P3S09"
-append using "Data and Code/R1400P3S11"
+clear all 
+
+odbc load, table("R1398P3S12") dsn("heis1398")
+keep DYCOL03 Address
+destring DYCOL03, replace force
+
+save "Data and Code/R1398P3S12" , replace
+
+
+append using "Data and Code/R1398P3S03"
+append using "Data and Code/R1398P3S05"
+append using "Data and Code/R1398P3S06"
+append using "Data and Code/R1398P3S07"
+append using "Data and Code/R1398P3S08"
+append using "Data and Code/R1398P3S09"
+append using "Data and Code/R1398P3S11"
 collapse (sum) DYCOL03 ,by(Address)
 
 
-save "Data and Code/R1400P3S2" , replace
+save "Data and Code/R1398P3S2" , replace
 
 
 //________________________
 clear all 
 
-odbc load, table("R1400P3S04") dsn("heis1400")
+odbc load, table("R1398P3S04") dsn("heis1398")
 keep DYCOL04 Address
 destring DYCOL04, replace force
 
-save "Data and Code/R1400P3S04" , replace
+save "Data and Code/R1398P3S04" , replace
 
 
 clear all 
 
-odbc load, table("U1400P3S04") dsn("heis1400")
+odbc load, table("U1398P3S04") dsn("heis1398")
 keep DYCOL04 Address
 destring DYCOL04, replace force
 
-save "Data and Code/U1400P3S04" , replace
+save "Data and Code/U1398P3S04" , replace
 
-append using "Data and Code/R1400P3S04"
+append using "Data and Code/R1398P3S04"
 collapse (sum) DYCOL04 ,by(Address)
 
-save "Data and Code/R1400P3S4" , replace
+save "Data and Code/R1398P3S4" , replace
 
 ///-----------------------
 clear all
 
 
 
-use "Data and Code/P1400"
+use "Data and Code/P1398"
 
-merge m:1 Address using "Data and Code/R1400P3S4" , nogenerate
-save "Data and Code/P1400" , replace
+merge m:1 Address using "Data and Code/R1398P3S4" , nogenerate
+save "Data and Code/P1398" , replace
 
 clear all
-use "Data and Code/P1400"
-merge m:1 Address using "Data and Code/R1400P3S2" , nogenerate
-save "Data and Code/P1400" , replace
+use "Data and Code/P1398"
+merge m:1 Address using "Data and Code/R1398P3S2" , nogenerate
+save "Data and Code/P1398" , replace
 clear all
 
-use "Data and Code/P1400"
-merge m:1 Address using "Data and Code/U1400P3S2" , nogenerate
-save "Data and Code/P1400" , replace
+use "Data and Code/P1398"
+merge m:1 Address using "Data and Code/U1398P3S2" , nogenerate
+save "Data and Code/P1398" , replace
 clear all
 
-use "Data and Code/P1400"
-merge m:1 Address using "Data and Code/U1400P3S1", nogenerate
+use "Data and Code/P1398"
+merge m:1 Address using "Data and Code/U1398P3S1", nogenerate
 
 replace DYCOL03 = 0 if DYCOL03 == .
 gen expd = DYCOL04 + DYCOL03 + DYCOL06
 
-save "Data and Code/P1400" , replace
+save "Data and Code/P1398" , replace
 
 
 ///%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -313,48 +313,48 @@ clear all
 
 
 
-use "Data and Code/wr1400"
+use "Data and Code/wr1398"
 keep Address weight
 destring weight, replace
-save "Data and Code/wr1400", replace
+save "Data and Code/wr1398", replace
 clear all
 
-use "Data and Code/R1400"
+use "Data and Code/R1398"
 keep Address DYCOL03
 rename (DYCOL03)(relate)
 destring relate, replace
 label variable relate "Relationship of Rural"
-save "Data and Code/R1400", replace
+save "Data and Code/R1398", replace
 clear all
 
-use "Data and Code/wr1400"
-merge 1:m Address using "Data and Code/R1400", nogenerate
-save "Data and Code/wr1400" , replace
+use "Data and Code/wr1398"
+merge 1:m Address using "Data and Code/R1398", nogenerate
+save "Data and Code/wr1398" , replace
 clear all
 
-odbc load, table("R1400P4S01") dsn("heis1400")
+odbc load, table("R1398P4S01") dsn("heis1398")
 keep Address DYCOL15
 destring DYCOL15, replace
 rename DYCOL15 annsal
 label variable annsal "Annual Salary"
-merge m:m Address using "Data and Code/wr1400"
+merge m:m Address using "Data and Code/wr1398"
 keep if _merge == 3
 drop _merge
 save "Data and Code/annsal", replace
 clear all
 
-odbc load, table("R1400P4S02") dsn("heis1400")
+odbc load, table("R1398P4S02") dsn("heis1398")
 keep Address DYCOL15
 destring DYCOL15, replace
 rename DYCOL15 anninc
 label variable anninc "Annual Income"
-merge m:m Address using "Data and Code/wr1400"
+merge m:m Address using "Data and Code/wr1398"
 keep if _merge == 3
 drop _merge
 save "Data and Code/anninc", replace
 clear all
 
-use "Data and Code/wr1400"
+use "Data and Code/wr1398"
 merge m:m Address using "Data and Code/annsal", nogenerate
 merge m:m Address using "Data and Code/anninc", nogenerate
 replace anninc = 0 if anninc == .
@@ -368,54 +368,54 @@ quietly by Address: gen dup = cond(_N==1, 0, _n)
 tabulate dup
 drop if dup > 0
 drop dup
-save "Data and Code/wr1400", replace
+save "Data and Code/wr1398", replace
 
 
 clear all
-// Prime-U == wu1400
+// Prime-U == wu1398
 
 
-use "Data and Code/wu1400"
+use "Data and Code/wu1398"
 destring weight, replace
-save "Data and Code/wu1400", replace
+save "Data and Code/wu1398", replace
 clear all
 
-use "Data and Code/U1400"
+use "Data and Code/U1398"
 keep Address DYCOL03
 rename (DYCOL03)(relate)
 destring relate, replace
 label variable relate "Relationship of Urban"
-save "Data and Code/U1400", replace
+save "Data and Code/U1398", replace
 clear all
 
-use "Data and Code/wu1400"
-merge 1:m Address using "Data and Code/U1400", nogenerate
-save "Data and Code/wu1400" , replace
+use "Data and Code/wu1398"
+merge 1:m Address using "Data and Code/U1398", nogenerate
+save "Data and Code/wu1398" , replace
 clear all
 
-odbc load, table("U1400P4S01") dsn("heis1400")
+odbc load, table("U1398P4S01") dsn("heis1398")
 keep Address DYCOL15
 destring DYCOL15, replace
 rename DYCOL15 annsal
 label variable annsal "Annual Salary of Urban"
-merge m:m Address using "Data and Code/wu1400"
+merge m:m Address using "Data and Code/wu1398"
 keep if _merge == 3
 drop _merge
 save "Data and Code/annsal-U", replace
 clear all
 
-odbc load, table("U1400P4S02") dsn("heis1400")
+odbc load, table("U1398P4S02") dsn("heis1398")
 keep Address DYCOL15
 destring DYCOL15, replace
 rename DYCOL15 anninc
 label variable anninc "Annual Income-U"
-merge m:m Address using "Data and Code/wu1400"
+merge m:m Address using "Data and Code/wu1398"
 keep if _merge == 3
 drop _merge
 save "Data and Code/anninc-U", replace
 clear all
 
-use "Data and Code/wu1400"
+use "Data and Code/wu1398"
 merge m:m Address using "Data and Code\annsal-U", nogenerate
 merge m:m Address using "Data and Code\anninc-U", nogenerate
 replace anninc = 0 if anninc == .
@@ -428,16 +428,16 @@ quietly by Address: gen dup = cond(_N==1, 0, _n)
 tabulate dup
 drop if dup > 0
 drop dup
-save "Data and Code/wu1400", replace
+save "Data and Code/wu1398", replace
 
-use "Data and Code/wr1400"
-append using "Data and Code/wu1400"
-save "Data and Code/f1400", replace
+use "Data and Code/wr1398"
+append using "Data and Code/wu1398"
+save "Data and Code/f1398", replace
 clear all
 
-use "Data and Code/P1400"
-merge m:1 Address using "Data and Code/f1400", nogenerate
-save "Data and Code/P1400", replace
+use "Data and Code/P1398"
+merge m:1 Address using "Data and Code/f1398", nogenerate
+save "Data and Code/P1398", replace
 
 
 ////%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -524,7 +524,7 @@ label values marr Marital_Status
 label define Residence 1 "Urban" 0 "Rural"
 label values ur Residence
 
-save "Data and Code/P1400" , replace
+save "Data and Code/P1398" , replace
 
 
 ////// Problem 2 ////////
@@ -608,19 +608,6 @@ est clear
 eststo: reg inc gender age edustate employ inactWage skilled ur marr age2 educ yh2 yh3[fweight = weight], vce(robust)
 
 esttab using "Table and Graph/p4.tex", se r2 wide  replace title(Regression table\label{tab4})
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
